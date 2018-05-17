@@ -1,0 +1,15 @@
+/* pages/showMessage/showMessage.wxss */
+.root {
+  width: 100%;
+  padding-top: 25rpx;
+  background: #f3f3f3;
+  overflow-y: scroll;
+}
+
+.msgView {
+  width: 100%;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}

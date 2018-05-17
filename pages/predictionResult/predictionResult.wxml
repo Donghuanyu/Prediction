@@ -1,0 +1,55 @@
+<!--pages/predictionResult/predictionResult.wxml-->
+<view class='container rootView'>
+  <!-- 恭喜 -->
+  <view class='headView'>
+    <view class='headTitle'>
+      <!-- <image class='imgView' src='../../image/icon_congratulations.png'></image> -->
+      <text class='imgTitle'>Congratulations</text>
+    </view>
+    <text>你已经完成了soul的灵魂鉴定题</text>
+  </view>
+
+  <!-- 结果，tag和头像  -->
+  <view class='resultView'>
+    <view class='tag'>
+      <view class='tagLeft' wx:key="{{id}}" wx:for="{{tagsLeft}}" wx:for-index="id" wx:for-item="item">
+        <text decode="{{true}}" class='tagTitle'>{{item.title}}&ensp;</text>
+        <text class='tagValue'>{{item.value}}</text>
+      </view>
+    </view>
+    <view>
+      <image class='avatarView' src='{{avatarUrl}}'></image>
+    </view>
+    <view class='tag'>
+      <view class='tagRight' wx:key="{{id}}" wx:for="{{tagsRight}}" wx:for-index="id" wx:for-item="item">
+        <text decode="{{true}}" class='tagTitle'>{{item.title}}&ensp;</text>
+        <text class='tagValue'>{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 结果名称 -->
+  <view class='conclusionView'>
+    <text class='resultTitle'  decode="{{true}}">你属于&ensp;</text>
+    <text class='resultName'>{{predictionResult.value}}</text>
+  </view>
+
+  <!-- 结论内容 -->
+  <view class='conclusionView' hidden='{{!showUser}}'>
+    <text>下面是与您匹配的用户：</text>
+  </view>
+
+  <!-- 匹配用户 -->
+  <view class='matchView'>
+      <view class='userView' wx:key="{{id}}" wx:for="{{matchUsers}}" wx:for-index="id" wx:for-item="item">
+        <view class='userItem'>
+          <image class='userImg' src='{{item.avatarUrl}}'></image>
+          <text class='userName'>{{item.nickName}}</text>
+        </view>
+      </view>
+  </view>
+
+  <button class='commonButton shareButton'>分享结果</button>
+
+
+</view>

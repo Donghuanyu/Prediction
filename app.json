@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/match/match",
+    "pages/catalog/catalog",
+    "pages/subject/subject",
+    "pages/predictionResult/predictionResult",
+    "pages/showMatch/showMatch",
+    "pages/showMessage/showMessage"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  }
+}

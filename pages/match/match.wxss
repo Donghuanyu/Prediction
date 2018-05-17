@@ -1,0 +1,20 @@
+/* pages/match.wxss */
+.inputView {
+    margin: 16px 0 16px 0;
+}
+
+.textLayout {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    font-size: 11pt;
+    color: #b2b2b2;
+}
+
+.textView {
+    margin: 1px 0 1px 0;
+}
+
+.root {
+  width: 98%;
+}

@@ -1,0 +1,10 @@
+<!--pages/showMessage/showMessage.wxml-->
+<view class='rootView'>
+  <view class='msgView' wx:key="{{userId}}" wx:for="{{result}}" wx:for-index="userId" wx:for-item="item">
+    <view class='userItem'>
+      <image class='userImg' src='{{item.avatarUrl}}'></image>
+      <text class='userName'>{{item.nickName}}</text>
+      <text class='userName'>{{item.content}}</text>
+    </view>
+  </view>
+</view>

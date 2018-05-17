@@ -1,0 +1,16 @@
+<!--pages/subject/subject.wxml-->
+<view class='container rootView' scroll-y enable-back-to-top>
+  <!-- 进度条 -->
+  <progress class='progressView' percent="{{percent}}" stroke-width="12" show-info backgroundColor="#fff" activeColor="yellow"/>
+  <!-- 题目  -->
+  <view class='subjectView'>
+    <text class='subjectTitle'>{{subject.title}}</text>
+    <view class='subjectAnswer' wx:key="{{subject.id}}" wx:for="{{subject.answers}}" wx:for-index="id" wx:for-item="item"
+      bindtap='answerClick' data-answer='{{item.id}}' style="{{currentAnswer == item.id ? 'border:5rpx solid #c9f0e8;' : 'border:0rpx solid #f2f2f2;'}}">
+      {{item.title}}
+    </view>
+  </view>
+  <!-- 按钮 -->
+  <button class='subjectButton' size="default" hover-class='subjectButtonCover' bindtap='nextClick' hidden='{{showFinish}}'>下一题</button>
+  <button class='subjectButton' size="default" hover-class='subjectButtonCover' bindtap='finishClick' hidden='{{!showFinish}}'>完成答题</button>
+</view>

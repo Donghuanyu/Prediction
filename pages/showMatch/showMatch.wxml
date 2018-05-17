@@ -1,0 +1,23 @@
+<!--pages/showMatch/showMatch.wxml-->
+<view class='container root'>
+  <view class='userItem'>
+    <image class='imgView' src='{{result.matchUser.avatarUrl}}'></image>
+    <view class='userInfo'>
+      <view>
+        <text>昵称：{{result.matchUser.name}}</text>
+        <image class='genderIcon' wx:if="{{result.matchUser.gender == '男'}}" src="../../image/icon_male.png"></image>
+        <image class='genderIcon' wx:if="{{result.matchUser.gender == '女'}}" src="../../image/icon_female.png"></image>
+      </view>
+      <text wx:if="{{result.matchUser.business != null && '' != result.matchUser.business}}">职业：{{result.matchUser.business}}</text>
+      <text wx:if="{{result.matchUser.employment != null && '' != result.matchUser.employment}}">公司：{{result.matchUser.employment}}</text>
+    </view>
+  </view>
+  <text wx:if="{{result.user == null}}" style='color: gray;font-size: 8pt; margin: 25rpx;'>匹配到的用户还未使用过本小程序，您可以去答题</text>
+  <form wx:if="{{result.user != null}}" bindsubmit='submit' report-submit>
+    <view class='formView'>
+      <textarea class='msgView' placeholder='您可以在此处给上面匹配到的用户留言，点击提交即可；也可以直接开始答题测试' name='message' ></textarea>
+      <button class="commonButton" form-type='submit' type="default" size="default" loading="{{loading}}" disabled='{{loading}}'>提交</button>
+    </view>
+  </form>
+  <button class="commonButton" style='margin-top:0rpx;' type="primary" size="default" disabled='{{loading}}' bindtap='goPrediction'>去答题</button>
+</view>

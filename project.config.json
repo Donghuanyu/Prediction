@@ -1,0 +1,53 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.98",
+	"appid": "wx4d9ac396de7f196c",
+	"projectname": "Prediction",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "匹配结果",
+					"pathName": "pages/showMatch/showMatch",
+					"query": "result={\"matchUser\":{\"id\": \"b044f640574511e8a80400163e0da5d4\",\"name\": \"Mr.harry\",\"avatarUrl\": \"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erwZ5htCR1qSPjyVW1u6IIVyaBnlWKnaibNJVwgMOgJqB4eVsX2IqDViazyTXic0wBdsmNd6nVgicBwXA/132\",\"gender\": \"男\",\"employment\": \"软件公司\",\"business\": \"软件开发\"},\"user\":{\"avatarUrl\":\"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erwZ5htCR1qSPjyVW1u6IIVyaBnlWKnaibNJVwgMOgJqB4eVsX2IqDViazyTXic0wBdsmNd6nVgicBwXA/132\",\"city\":\"闵行\",\"country\":\"中国\",\"gender\":1,\"id\":\"b044f640574511e8a80400163e0da5d4\",\"language\":\"zh_CN\",\"nickName\":\"Mr.harry\",\"openId\":\"om3nD5AAeXgiCtTfNeRdpXvnC8Lg\",\"province\":\"上海\"}}"
+				},
+				{
+					"id": -1,
+					"name": "留言列表",
+					"pathName": "pages/showMessage/showMessage",
+					"query": "userId=b044f640574511e8a80400163e0da5d4"
+				}
+			]
+		}
+	}
+}
