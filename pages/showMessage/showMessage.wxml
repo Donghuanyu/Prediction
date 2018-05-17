@@ -1,10 +1,12 @@
 <!--pages/showMessage/showMessage.wxml-->
 <view class='rootView'>
   <view class='msgView' wx:key="{{userId}}" wx:for="{{result}}" wx:for-index="userId" wx:for-item="item">
-    <view class='userItem'>
-      <image class='userImg' src='{{item.avatarUrl}}'></image>
-      <text class='userName'>{{item.nickName}}</text>
-      <text class='userName'>{{item.content}}</text>
+    <view class='msgItem'>
+      <image class='imgView' src='{{item.avatarUrl}}'></image>
+      <view class='infoView'>
+        <text style='font-size: 12pt;'>{{item.nickName}}</text>
+        <text style='font-size: 10pt; color: gray; margin-top: 25rpx;text-align: justify;'>{{item.content}}</text>
+      </view>
     </view>
   </view>
 </view>
