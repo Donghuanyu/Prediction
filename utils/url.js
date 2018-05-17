@@ -1,7 +1,7 @@
 const DEBUG = "debug";
 const RELEASE = "release";
 const DEBUG_BASE_URL = "http://localhost:8080/prediction";
-const RELEASE_BASE_URL = "http://47.98.196.142:8080/prediction";
+const RELEASE_BASE_URL = "http://1.1.1.1";
 
 function debugOrRelease() {
   return DEBUG;
