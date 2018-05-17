@@ -51,7 +51,8 @@
 
   <button class='commonButton shareButton' bindtap='shareResult'>分享结果</button>
 
-  <view class='canvasBox' hidden='{{!showShare}}'>
+  <!-- 分享画面 -->
+  <view class='canvasBox' hidden='{{!showShare}}' bindtap='closeShareView'>
     <view class='canvasView'>
       <canvas canvas-id='shareCanvas' style='width: 100%; height:{{windowHeight}}px;'></canvas>
     </view>

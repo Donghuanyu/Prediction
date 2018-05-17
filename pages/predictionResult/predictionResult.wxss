@@ -167,19 +167,25 @@ page {
 .canvasBox {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
+  /* justify-content: center; */
+  align-content: center;
+  align-items: center;
   z-index: 1000;
   background: rgba(0, 0, 0, 0.6);
 }
 
 .canvasView {
-  width: 90%;
+  width: 85%;
   height: 80%;
-  position: fixed;
+  /* position: fixed;
   left: 0;
-  top: 100rpx;
+  top: 100rpx; */
+  margin-top: 25px;
   z-index: 1000;
 }
 

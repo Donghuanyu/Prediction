@@ -14,7 +14,8 @@ Page({
     showShare: false,
     avatarImg: null,
     windowHeight: null,
-    windowWidth: null
+    windowWidth: null,
+    hasDraw: false
   },
 
   /**
@@ -23,8 +24,8 @@ Page({
   onLoad: function (options) {
     var systemInfo = wx.getSystemInfoSync();
     this.setData({
-      windowHeight: systemInfo.screenHeight,
-      windowWidth: systemInfo.screenWidth
+      windowWidth: systemInfo.windowWidth * 0.85,
+      windowHeight: systemInfo.windowHeight * 0.80
     })
     var result = JSON.parse(options.result)
     console.log(result)
@@ -92,20 +93,6 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
@@ -116,10 +103,17 @@ Page({
    * 分享按钮
    */
   shareResult: function (e) {
-    var that = this
-    this.setData({
-      showShare: true
+    
+    if (this.data.hasDraw) {
+      this.setData({
+        showShare: true
+      })
+      return
+    }
+    wx.showLoading({
+      title: '加载中...',
     })
+    var that = this
     //下载头像
     wx.downloadFile({
       url: that.data.avatarUrl,
@@ -136,45 +130,74 @@ Page({
    * 绘制分享图片
    */
   drawImage() {
+
     console.log('开始绘制图片')
     //绘制canvas图片
     var that = this
     const ctx = wx.createCanvasContext('shareCanvas')
+    
+    //全局的背景色
+    var color = '#85dbd0'
     var bgPath = '../../image/bg_qr.png'
     var portraitPath = that.data.avatarImg
     var hostNickname = getApp().globalData.userInfo.nickName
-
-    // var qrPath = that.data.qrcode_temp
+    var qrPath = '../../image/img_qr.jpg'
     var windowWidth = that.data.windowWidth
     var windowHeight = that.data.windowHeight
+    var fontSize = 0.05 * windowWidth
     var scale = 1.6
+    var step = 0.07
     //绘制背景图片
-    ctx.drawImage(bgPath, 0, 0, windowWidth, windowHeight * 0.7)
-
+    ctx.drawImage(bgPath, 0, 0, windowWidth, windowHeight)
+    //绘制标题
+    ctx.setFillStyle(color)
+    ctx.setFontSize(windowWidth * 0.08)
+    ctx.setTextAlign('center')
+    ctx.fillText('Congratulations', windowWidth / 2, 0.09 * windowWidth)
     //绘制头像
     ctx.save()
     ctx.beginPath()
+    //画圆（X[圆心X坐标], Y[圆心Y坐标], R[圆形半径], 起始弧度, 总止弧度）
     ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
-    ctx.clip()
-    ctx.drawImage(portraitPath, 0.7 * windowWidth / 2, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
+    ctx.clip()  //裁剪
+    ctx.drawImage(portraitPath, windowWidth / 2 - 0.15 * windowWidth, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
     ctx.restore()
-    //绘制第一段文本
-    ctx.setFillStyle('#ffffff')
-    ctx.setFontSize(0.037 * windowWidth)
+    //绘制名称
+    ctx.setFillStyle('gray')
+    ctx.setFontSize(fontSize)
     ctx.setTextAlign('center')
-    ctx.fillText(hostNickname + ' 正在参加疯狂红包活动', windowWidth / 2, 0.52 * windowWidth)
-    //绘制第二段文本
-    ctx.setFillStyle('#ffffff')
-    ctx.setFontSize(0.037 * windowWidth)
+    ctx.fillText(hostNickname + ' 属于：', windowWidth / 2, 0.55 * windowWidth)
+    //绘制匹配结果类型
+    ctx.setFillStyle(color)
+    ctx.setFontSize(fontSize)
     ctx.setTextAlign('center')
-    ctx.fillText('邀请你一起来领券抢红包啦~', windowWidth / 2, 0.57 * windowWidth)
+    ctx.fillText(this.data.predictionResult.value, windowWidth / 2, 0.62 * windowWidth)
+    //循环绘制TAG标签
+    var start = 0.62
+    for (var i = 0; i < this.data.tags.length; i++) {
+      start = start + step
+      ctx.setFillStyle('gray')
+      ctx.setFontSize(fontSize)
+      ctx.setTextAlign('center')
+      ctx.fillText(this.data.tags[i].title + '：' + this.data.tags[i].value, windowWidth / 2, start * windowWidth)
+    }
+
     //绘制二维码
-    // ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
-    //绘制第三段文本
-    ctx.setFillStyle('#ffffff')
-    ctx.setFontSize(0.037 * windowWidth)
-    ctx.setTextAlign('center')
-    ctx.fillText('长按二维码领红包', windowWidth / 2, 1.36 * windowWidth)
+    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, (start + step) * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
     ctx.draw();
+    wx.hideLoading()
+    this.setData({
+      hasDraw: true,
+      showShare: true
+    })
+  },
+
+  /**
+   * 关闭分享页面
+   */
+  closeShareView: function () {
+    this.setData({
+      showShare: false
+    })
   }
 })
