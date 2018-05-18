@@ -172,7 +172,6 @@ page {
   position: fixed;
   top: 0;
   left: 0;
-  /* justify-content: center; */
   align-content: center;
   align-items: center;
   z-index: 1000;
@@ -181,11 +180,29 @@ page {
 
 .canvasView {
   width: 85%;
-  height: 80%;
-  /* position: fixed;
-  left: 0;
-  top: 100rpx; */
+  height: 90%;
   margin-top: 25px;
-  z-index: 1000;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 2%;
+  left: 7.5%;
 }
 
+.buttonView {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  z-index: 1001;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonCommon {
+  width: 90%;
+  background-color: #c9f0e8;
+  border-radius: 25px;
+  text-align: center;
+}

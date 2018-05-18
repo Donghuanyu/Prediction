@@ -52,9 +52,11 @@
   <button class='commonButton shareButton' bindtap='shareResult'>分享结果</button>
 
   <!-- 分享画面 -->
-  <view class='canvasBox' hidden='{{!showShare}}' bindtap='closeShareView'>
-    <view class='canvasView'>
-      <canvas canvas-id='shareCanvas' style='width: 100%; height:{{windowHeight}}px;'></canvas>
+  <view class='canvasBox' hidden='{{!showShare}}' bindtap='closeShareView'></view>
+  <view class='canvasView' hidden='{{!showShare}}'>
+    <canvas canvas-id='shareCanvas' style='width: 100%; height:{{windowHeight}}px;'></canvas>
+    <view class='buttonView'>
+      <button class='commonButton buttonCommon' bindtap='saveShareImg'>保存分享图</button>
     </view>
   </view>
 

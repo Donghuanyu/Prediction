@@ -96,6 +96,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+    return {
+      path: '/pages/index/index'
+    }
   
   },
 
@@ -112,6 +116,7 @@ Page({
     }
     wx.showLoading({
       title: '加载中...',
+      mask: true
     })
     var that = this
     //下载头像
@@ -183,7 +188,7 @@ Page({
     }
 
     //绘制二维码
-    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, (start + step) * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
+    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, (start + 0.05) * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
     ctx.draw();
     wx.hideLoading()
     this.setData({
@@ -199,5 +204,78 @@ Page({
     this.setData({
       showShare: false
     })
+  },
+
+  /**
+   * 保存分享图片
+   */
+  saveShareImg: function (e) {
+    var that = this
+    wx.showLoading({
+      title: '请稍后...',
+      mask: true
+    })
+    wx.canvasToTempFilePath({
+      canvasId: 'shareCanvas',
+      quality: 1,
+      success: res => {
+        console.log("保存图片成功：" + res.tempFilePath)
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: fileRes => {
+            wx.hideLoading()
+            wx.showModal({
+              title: '提示',
+              content: '保存成功，快去分享图片吧',
+              showCancel: false,
+              confirmText: '好的',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                }
+              },
+              fail: function (res) { },
+              complete: function (res) { },
+            })
+          },
+          fail: fileErro => {
+            wx.hideLoading()
+            wx.showModal({
+              title: '提示',
+              content: '抱歉，保存出错了',
+              showCancel: false,
+              confirmText: '知道了',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                  that.setData({
+                    showShare: false
+                  })
+                }
+              },
+              fail: function (res) { },
+              complete: function (res) { },
+            })
+          },
+          fail: erro => {
+            wx.hideLoading()
+            wx.showModal({
+              title: '提示',
+              content: '抱歉，保存出错了',
+              showCancel: false,
+              confirmText: '知道了',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                }
+              },
+              fail: function (res) { },
+              complete: function (res) { },
+            })
+          }
+        })
+        
+      }
+    }, this)
   }
 })
