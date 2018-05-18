@@ -1,0 +1,73 @@
+/* pages/leaveMsg/leaveMsg.wxss */
+
+page {
+  -webkit-user-select:none;
+  user-select:none;
+  width:100%;
+  overflow-x:hidden;
+  height: 100%;
+}
+
+.root {
+  width: 100%;
+  padding-top: 25rpx;
+  background: #f3f3f3;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.userItem {
+  width: 100%;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.imgView {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 25rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.userInfo {
+  height: 128rpx;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  font-size: 10pt;
+}
+
+.genderIcon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 10rpx;
+}
+
+.formView {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.msgView {
+  width: 95%;
+  font-size: 9pt;
+  border: 1px solid white;
+  background: white;
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
+  padding: 10px;
+}
+
+.submitButton {
+  background-color: #c9f0e8;
+}

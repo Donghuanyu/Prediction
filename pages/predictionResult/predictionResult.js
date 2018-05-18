@@ -277,5 +277,15 @@ Page({
         
       }
     }, this)
+  },
+
+  /**
+   * 匹配用的点击事件
+   */
+  matchUserItemClick: function (e) {
+    var clickUser = e.currentTarget.dataset.user
+    wx.redirectTo({
+      url: '../leaveMsg/leaveMsg?user=' + JSON.stringify(clickUser),
+    })
   }
 })

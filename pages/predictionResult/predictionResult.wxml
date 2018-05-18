@@ -42,7 +42,7 @@
   <!-- 匹配用户 -->
   <view class='matchView'>
       <view class='userView' wx:key="{{id}}" wx:for="{{matchUsers}}" wx:for-index="id" wx:for-item="item">
-        <view class='userItem'>
+        <view class='userItem' bindtap='matchUserItemClick' data-user='{{item}}'>
           <image class='userImg' src='{{item.avatarUrl}}'></image>
           <text class='userName'>{{item.nickName}}</text>
         </view>

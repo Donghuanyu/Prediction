@@ -5,7 +5,7 @@ const RELEASE_BASE_URL = "http://1.1.1.1:8080/prediction";
 
 function debugOrRelease() {
   return DEBUG;
-  // return RELEASsE;
+  // return RELEASE;
 }
 
 function getBaseUrl() {

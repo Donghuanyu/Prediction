@@ -1,0 +1,19 @@
+<!--pages/leaveMsg/leaveMsg.wxml-->
+<view class='container root'>
+  <view class='userItem'>
+    <image class='imgView' src='{{targetUser.avatarUrl}}'></image>
+    <view class='userInfo'>
+      <view>
+        <text>{{targetUser.nickName}}</text>
+        <image class='genderIcon' wx:if="{{targetUser.gender == '1'}}" src="../../image/icon_male.png"></image>
+        <image class='genderIcon' wx:if="{{result.matchUser.gender == '2'}}" src="../../image/icon_female.png"></image>
+      </view>
+    </view>
+  </view>
+  <form style='width: 100%;' bindsubmit='submit' report-submit>
+    <view class='formView'>
+      <textarea class='msgView' placeholder='您可以在此处给上面匹配到的用户留言，点击提交即可' name='message'></textarea>
+      <button class="commonButton submitButton" form-type='submit' size="default" loading="{{loading}}" disabled='{{loading}}'>提交</button>
+    </view>
+  </form>
+</view>

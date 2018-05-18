@@ -205,12 +205,6 @@ Page({
     });
     var that = this;
     var user = getApp().globalData.userInfo;
-    user["openId"] = "default_test_001";
-    user["gender"] = user.gender.toString();
-    user["id"] = "";
-    user["predictionResultId"] = "";
-    delete user.country;
-    delete user.province;
     var requestParam = {
       type: that.data.type,
       answerIds: that.data.submitAnswers,
