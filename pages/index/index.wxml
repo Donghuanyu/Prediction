@@ -13,7 +13,7 @@
   </navigator>
   
   <navigator class="testView" url='/pages/catalog/catalog'>
-    <text class="indexTestTitle">答题测试-灵魂</text>
+    <text class="indexTestTitle">答题匹配-灵魂</text>
     <image class="imgView" src='../../image/icon_test.png'></image>
   </navigator>
 </view>

@@ -1,12 +1,12 @@
 <!--pages/match.wxml-->
 <form bindsubmit='matchUser'>
   <view class="container">
-    <input class="commonInput inputView" name="name" placeholder="请输入您的昵称" auto-focus/>
+    <input class="commonInput inputView" name="name" placeholder="请输入您在知乎平台的昵称" auto-focus/>
     <view class="textLayout">
       <text class="textView">温馨提示：</text>
       <text class="textView">1.在输入框中填入您的昵称</text>
       <text class="textView">2.点击确认按钮</text>
-      <text class="textView">3.系统将根据您输入的昵称为您匹配以为异性用户</text>
+      <text class="textView">3.系统将根据您输入的昵称为您匹配一位异性用户</text>
     </view>
     <button class="commonButton" form-type='submit' type="primary" size="default" loading="{{loading}}" disabled='{{loading}}'>确认</button>
   </view>
