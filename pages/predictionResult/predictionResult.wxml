@@ -44,7 +44,19 @@
       <view class='userView' wx:key="{{id}}" wx:for="{{matchUsers}}" wx:for-index="id" wx:for-item="item">
         <view class='userItem' bindtap='matchUserItemClick' data-user='{{item}}'>
           <image class='userImg' src='{{item.avatarUrl}}'></image>
-          <text class='userName'>{{item.nickName}}</text>
+          <view class='userInfoView'>
+            <view class='userNameView'>
+              <text>{{item.nickName}}</text>
+              <image class='genderIcon' wx:if="{{item.gender == '1'}}" src="../../image/icon_male.png"></image>
+              <image class='genderIcon' wx:if="{{item.gender == '2'}}" src="../../image/icon_female.png"></image>
+            </view>
+            <view class='userResultView'>
+              <text class='resultTitle'  decode="{{true}}" wx:if="{{item.gender == '1'}}">他属于&ensp;</text>
+              <text class='resultTitle'  decode="{{true}}" wx:if="{{item.gender == '2'}}">她属于&ensp;</text>
+              <text class='resultName'>{{predictionResult.value}}</text>
+            </view>
+          </view>
+          
         </view>
       </view>
   </view>

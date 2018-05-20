@@ -27,8 +27,8 @@ page {
 }
 
 .imgView {
-  width: 48rpx;
-  height: 48rpx;
+  width: 40rpx;
+  height: 40rpx;
   margin-right: 48rpx;
   margin-bottom: 48rpx;
   justify-content: center;
@@ -205,4 +205,33 @@ page {
   background-color: #c9f0e8;
   border-radius: 25px;
   text-align: center;
+}
+
+.genderIcon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 10rpx;
+}
+
+.userNameView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.userInfoView {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 20rpx;
+}
+
+.userResultView {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: flex-start;
 }
