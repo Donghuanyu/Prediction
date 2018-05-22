@@ -12,6 +12,14 @@
       <text wx:if="{{result.matchUser.employment != null && '' != result.matchUser.employment}}">公司：{{result.matchUser.employment}}</text>
     </view>
   </view>
+  <view wx:if="{{result.matchUser.answerVoteUp != null && '' != result.matchUser.v}}" class='answerTitle'>
+    <text style='margin-left: 25rpx;'>点赞过的问题：</text>
+  </view>
+  <view class='answerView' wx:if="{{result.matchUser.answerVoteUp != null && '' != result.matchUser.v}}">
+    <view class='answerContent'>
+      <text>{{result.matchUser.answerVoteUp}}</text>
+    </view>
+  </view>
   <text wx:if="{{result.user == null}}" style='color: gray;font-size: 8pt; margin: 25rpx;'>匹配到的用户还未使用过本小程序，您可以去答题</text>
   <form style='width: 100%;' wx:if="{{result.user != null}}" bindsubmit='submit' report-submit>
     <view class='formView'>

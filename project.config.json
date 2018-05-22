@@ -33,13 +33,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "匹配结果",
 					"pathName": "pages/showMatch/showMatch",
-					"query": "result={\"matchUser\":{\"id\": \"b044f640574511e8a80400163e0da5d4\",\"name\": \"Mr.harry\",\"avatarUrl\": \"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erwZ5htCR1qSPjyVW1u6IIVyaBnlWKnaibNJVwgMOgJqB4eVsX2IqDViazyTXic0wBdsmNd6nVgicBwXA/132\",\"gender\": \"男\",\"employment\": \"软件公司\",\"business\": \"软件开发\"},\"user\":{\"avatarUrl\":\"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erwZ5htCR1qSPjyVW1u6IIVyaBnlWKnaibNJVwgMOgJqB4eVsX2IqDViazyTXic0wBdsmNd6nVgicBwXA/132\",\"city\":\"闵行\",\"country\":\"中国\",\"gender\":1,\"id\":\"b044f640574511e8a80400163e0da5d4\",\"language\":\"zh_CN\",\"nickName\":\"Mr.harry\",\"openId\":\"om3nD5AAeXgiCtTfNeRdpXvnC8Lg\",\"province\":\"上海\"}}"
+					"query": "result={\"matchUser\":{\"id\": \"b044f640574511e8a80400163e0da5d4\",\"name\": \"Mr.harry\",\"avatarUrl\": \"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erwZ5htCR1qSPjyVW1u6IIVyaBnlWKnaibNJVwgMOgJqB4eVsX2IqDViazyTXic0wBdsmNd6nVgicBwXA/132\",\"gender\": \"男\",\"employment\": \"软件公司\",\"business\": \"软件开发\", \"answerVoteUp\":\"能否用一百字写清楚你最想要的生活？\"},\"user\":{\"avatarUrl\":\"https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erwZ5htCR1qSPjyVW1u6IIVyaBnlWKnaibNJVwgMOgJqB4eVsX2IqDViazyTXic0wBdsmNd6nVgicBwXA/132\",\"city\":\"闵行\",\"country\":\"中国\",\"gender\":1,\"id\":\"b044f640574511e8a80400163e0da5d4\",\"language\":\"zh_CN\",\"nickName\":\"Mr.harry\",\"openId\":\"om3nD5AAeXgiCtTfNeRdpXvnC8Lg\",\"province\":\"上海\"}}"
 				},
 				{
 					"id": -1,

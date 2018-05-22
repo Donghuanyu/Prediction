@@ -72,3 +72,27 @@ page {
   background-color: #c9f0e8;
   margin-top:0rpx;
 }
+
+.answerView {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  align-items: center;
+}
+
+.answerTitle {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-size: 8pt;
+  margin-top: 30rpx;
+  margin-bottom: 5rpx;
+  color: gray;
+}
+
+.answerContent {
+  font-size: 10pt;
+  margin: 25rpx;
+}
