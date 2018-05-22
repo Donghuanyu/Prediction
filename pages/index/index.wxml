@@ -7,6 +7,11 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
+  <view class='msgColumn'>
+    <navigator url="/pages/showMessage/showMessage">
+      <image class="msgImg" src='../../image/icon_msg.png'></image>
+    </navigator>
+  </view>
   <navigator class="matchView" url="/pages/match/match">
     <text class="indexMatchTitle">大数据匹配</text>
     <image class="imgView" src='../../image/icon_match.png'></image>

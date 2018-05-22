@@ -4,7 +4,10 @@
     <view class='msgItem'>
       <image class='imgView' src='{{item.avatarUrl}}'></image>
       <view class='infoView'>
-        <text style='font-size: 12pt;'>{{item.nickName}}</text>
+        <view class='rowView'>
+          <text style='font-size: 12pt;'>{{item.nickName}}</text>
+          <text style='font-size: 8pt;'>{{item.time}}</text>
+        </view>
         <text style='font-size: 10pt; color: gray; margin-top: 25rpx;text-align: justify;'>{{item.content}}</text>
       </view>
     </view>

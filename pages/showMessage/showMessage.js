@@ -15,12 +15,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options != null && options.userId != null && "" != options.userId) {
-      this.getMessageList(options.userId)
-      this.setData({
-        userId: options.userId
-      })
-    }
+    var userId = getApp().globalData.userInfo.id
+    this.getMessageList(userId)
+    this.setData({
+      userId: userId
+    })
   },
 
   /**
