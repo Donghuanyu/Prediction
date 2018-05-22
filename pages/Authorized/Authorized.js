@@ -92,6 +92,12 @@ Page({
           getApp().globalData.userInfo['openId'] = res.data.data.openId
         }
         console.log(getApp().globalData.userInfo);
+        wx.redirectTo({
+          url: '../index/index',
+          success: function(res) {},
+          fail: function(res) {},
+          complete: function(res) {},
+        })
       }
     })
   }

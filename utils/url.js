@@ -63,6 +63,20 @@ function getMessageList() {
   return getBaseUrl() + "/message/getMessageList";
 }
 
+/**
+ * 分页获取发给我的留言列表
+ */
+function getMessagePageList() {
+  return getBaseUrl() + "/message/getMessagePageList";
+}
+
+/**
+ * 分页获取我发送的留言列表
+ */
+function getFromMessagePageList() {
+  return getBaseUrl() + "/message/getFromMessagePageList";
+}
+
 
 module.exports = {
   matchUser: matchUser,
@@ -70,5 +84,7 @@ module.exports = {
   getPredictionResult: getPredictionResult,
   createUser: createUser,
   leaveMessage: leaveMessage,
-  getMessageList: getMessageList
+  getMessageList: getMessageList,
+  getMessagePageList: getMessagePageList,
+  getFromMessagePageList: getFromMessagePageList
 }

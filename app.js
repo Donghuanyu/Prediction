@@ -58,6 +58,10 @@ App({
           //成功
           this.globalData.userInfo['id'] = res.data.data.id
           this.globalData.userInfo['openId'] = res.data.data.openId
+          wx.setStorage({
+            key: 'userInfo',
+            data: this.globalData.userInfo,
+          })
         }
         console.log(this.globalData.userInfo);
       }

@@ -15,10 +15,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var userId = getApp().globalData.userInfo.id
-    this.getMessageList(userId)
-    this.setData({
-      userId: userId
+    var user = wx.getStorageSync("userInfo")
+    if (user != null && user.id != null && '' != user.id) {
+      var userId =  user.id
+      this.getMessageList(userId)
+      this.setData({
+        userId: userId
+      })
+      return
+    }
+    wx.showLoading({
+      title: '请稍后...',
+      mask: true,
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+    wx.getUserInfo({
+      withCredentials: false,
+      lang: 'zh_CN',
+      success: res => {
+        getApp().globalData.userInfo = res.userInfo
+        // 登录
+        wx.login({
+          success: loginRes => {
+            // 发送 res.code 到后台换取 openId, sessionKey, unionId
+            this.createUser(loginRes.code)
+          }
+        })
+      },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
 
@@ -103,6 +130,49 @@ Page({
       },
       fail: function (res) { },
       complete: function (res) { },
+    })
+  },
+
+  /**
+   * 将微信登录的code发送到后台处理
+   */
+  createUser: function (code) {
+    console.log(code)
+    wx.request({
+      method: 'POST',
+      url: URL.createUser(),
+      data: {
+        code: code,
+        user: getApp().globalData.userInfo
+      },
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: res => {
+        console.log(res);
+        wx.hideLoading()
+        if ('200' == res.data.code) {
+          //成功
+          getApp().globalData.userInfo['id'] = res.data.data.id
+          getApp().globalData.userInfo['openId'] = res.data.data.openId
+          wx.setStorage({
+            key: 'userInfo',
+            data: getApp().globalData.userInfo,
+          })
+          this.getMessageList(res.data.data.id)
+          this.setData({
+            userId: res.data.data.id
+          })
+          console.log(getApp().globalData.userInfo);
+        } else {
+          this.turnToIndex()
+        }
+        
+      },
+      fail: error => {
+        wx.hideLoading()
+        this.turnToIndex()
+      }
     })
   }
 })
