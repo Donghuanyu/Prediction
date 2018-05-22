@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.98",
+	"libVersion": "1.9.97",
 	"appid": "wx4d9ac396de7f196c",
 	"projectname": "Prediction",
 	"isGameTourist": false,
