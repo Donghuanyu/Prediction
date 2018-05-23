@@ -9,7 +9,6 @@ Page({
     //留言目标用户
     targetUser: null,
     user: getApp().globalData.userInfo
-  
   },
 
   /**

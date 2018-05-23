@@ -6,7 +6,7 @@
       <view>
         <text>{{targetUser.nickName}}</text>
         <image class='genderIcon' wx:if="{{targetUser.gender == '1'}}" src="../../image/icon_male.png"></image>
-        <image class='genderIcon' wx:if="{{result.matchUser.gender == '2'}}" src="../../image/icon_female.png"></image>
+        <image class='genderIcon' wx:if="{{targetUser.gender == '2'}}" src="../../image/icon_female.png"></image>
       </view>
     </view>
   </view>

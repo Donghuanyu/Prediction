@@ -186,7 +186,12 @@ Page({
       ctx.setTextAlign('center')
       ctx.fillText(this.data.tags[i].title + '：' + this.data.tags[i].value, windowWidth / 2, start * windowWidth)
     }
-
+    //绘制“你也来测一下吧”
+    start = start + 0.1
+    ctx.setFillStyle(color)
+    ctx.setFontSize(fontSize)
+    ctx.setTextAlign('center')
+    ctx.fillText('你也来测一下吧', windowWidth / 2, start * windowWidth)
     //绘制二维码
     ctx.drawImage(qrPath, 0.64 * windowWidth / 2, (start + 0.05) * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
     ctx.draw();
@@ -284,7 +289,7 @@ Page({
    */
   matchUserItemClick: function (e) {
     var clickUser = e.currentTarget.dataset.user
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../leaveMsg/leaveMsg?user=' + JSON.stringify(clickUser),
     })
   }

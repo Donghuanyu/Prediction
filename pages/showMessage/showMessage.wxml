@@ -1,50 +1,60 @@
 <!--pages/showMessage/showMessage.wxml-->
 <view class="{{showEmptyView ? 'rootEmptyView' : 'rootView'}}">
   <!-- 消息列表 -->
-  <view class='message' wx:if='{{!showEmptyView}}'>
+  <view class='message'>
 
     <!-- 顶部tab -->
     <view class='tabView'>
       <view class='tabButton'>
         <view class="{{inBox ? 'leftTabSelect' : 'leftTabNormal'}}" bindtap='selectBox' data-box='in'>收件箱</view>
-        <view class="{{sendBox ? 'rightSelect' : 'rightNormal'}}" bindtap='selectBox' data-box='send'>发件箱</view> 
+        <view class="{{sendBox ? 'rightSelect' : 'rightNormal'}}" bindtap='selectBox' data-box='send'>发件箱</view>
       </view>
     </view>
 
-    <!-- 我收到的消息列表 -->
-    <view wx:if='{{inBox}}' class='msgView' wx:key="{{userId}}" wx:for="{{result}}" wx:for-index="userId" wx:for-item="item">
-      <view class='msgItem'>
-        <image class='imgView' src='{{item.avatarUrl}}'></image>
-        <view class='infoView'>
-          <view class='rowView'>
-            <text style='font-size: 12pt;'>{{item.nickName}}</text>
-            <text wx:if="{{item.time != null && '' != item.time}}" style='font-size: 8pt;'>{{item.time}}</text>
+    <!-- 数据列表 -->
+    <view class='dataView' wx:if='{{!showEmptyView}}'>
+      <!-- 我收到的消息列表 -->
+      <view wx:if='{{inBox}}' class='msgView' wx:key="{{userId}}" wx:for="{{result}}" wx:for-index="userId" wx:for-item="item">
+        <view class='msgItem'>
+          <image class='imgView' src='{{item.avatarUrl}}'></image>
+          <view class='infoView'>
+            <view class='rowView'>
+              <text style='font-size: 12pt;'>{{item.nickName}}</text>
+              <text wx:if="{{item.time != null && '' != item.time}}" style='font-size: 8pt;'>{{item.time}}</text>
+            </view>
+            <text style='font-size: 10pt; color: gray; margin-top: 25rpx;text-align: justify;'>{{item.content}}</text>
           </view>
-          <text style='font-size: 10pt; color: gray; margin-top: 25rpx;text-align: justify;'>{{item.content}}</text>
         </view>
       </view>
+
+      <!-- 我发送的消息列表 -->
+      <view wx:if='{{sendBox}}' class='msgView' wx:key="{{userId}}" wx:for="{{sendBoxResult}}" wx:for-index="userId" wx:for-item="item">
+        <view class='msgItem'>
+          <image class='imgView' src='{{item.avatarUrl}}'></image>
+          <view class='infoView'>
+            <view class='rowView'>
+              <text style='font-size: 12pt;'>{{item.nickName}}</text>
+              <text wx:if="{{item.time != null && '' != item.time}}" style='font-size: 8pt;'>{{item.time}}</text>
+            </view>
+            <text style='font-size: 10pt; color: gray; margin-top: 25rpx;text-align: justify;'>{{item.content}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 加载更多 -->
+      <view class="loading" wx:if="{{isLodingMore && inBoxHasMore && inBox}}">正在载入更多...</view>
+      <view class="loading" wx:if="{{isLodingMore && sendBoxHasMore && sendBox}}">正在载入更多...</view>
+
     </view>
 
-    <!-- 我发送的消息列表 -->
-    <view wx:if='{{sendBox}}' class='msgView' wx:key="{{userId}}" wx:for="{{sendBoxResult}}" wx:for-index="userId" wx:for-item="item">
-      <view class='msgItem'>
-        <image class='imgView' src='{{item.avatarUrl}}'></image>
-        <view class='infoView'>
-          <view class='rowView'>
-            <text style='font-size: 12pt;'>{{item.nickName}}</text>
-            <text wx:if="{{item.time != null && '' != item.time}}" style='font-size: 8pt;'>{{item.time}}</text>
-          </view>
-          <text style='font-size: 10pt; color: gray; margin-top: 25rpx;text-align: justify;'>{{item.content}}</text>
-        </view>
-      </view>
+    <!-- empty view -->
+    <view class='emptyView' wx:if='{{showEmptyView}}' bindtap='refreshData'>
+      <image class='noImgView' src='../../image/img_no_msg.png'></image>
+      <text style='color: gray; font-size: 10pt;'>您暂时没有留言，点击可以刷新</text>
     </view>
 
   </view>
 
-  <!-- empty view -->
-  <view class='emptyView' wx:if='{{showEmptyView}}'>
-    <image class='noImgView' src='../../image/img_no_msg.png'></image>
-    <text style='color: gray; font-size: 10pt;'>您暂时没有留言，点击可以刷新</text>
-  </view>
+
 
 </view>

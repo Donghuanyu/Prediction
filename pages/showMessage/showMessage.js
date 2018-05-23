@@ -14,7 +14,10 @@ Page({
     isFresh: false,                   //是否在刷新
     showEmptyView: false,             //是否显示空视图，用于没有数据时展示
     inBox: true,                      //是否是收件箱
-    sendBox: false                    //是否是发件箱
+    sendBox: false,                   //是否是发件箱
+    inBoxHasMore: false,
+    sendBoxHasMore: false,
+    isLodingMore: false
   },
 
   /**
@@ -161,6 +164,17 @@ Page({
             result: allData
           })
         }
+
+        //如果当前页面已经是最后一页
+        if (this.data.page == res.data.data.sumPage) {
+          this.setData({
+            inBoxHasMore: false
+          })
+        } else {
+          this.setData({
+            inBoxHasMore: true
+          })
+        }
       },
       fail: error => {
         this.turnToIndex()
@@ -169,6 +183,10 @@ Page({
         if (this.data.isFresh) {
           wx.stopPullDownRefresh()
           wx.hideNavigationBarLoading()
+        } else if (this.data.isLodingMore) {
+          this.setData({
+            isLodingMore: false
+          })
         }
       }
     })
@@ -203,7 +221,7 @@ Page({
         }
         //有数据
         if (res.data.data.currentSize > 0) {
-          if (this.data.page == 1) {
+          if (this.data.pageSendBox == 1) {
             //如果是刷新，就清空之前的数据
             this.data.sendBoxResult = new Array()
           }
@@ -214,6 +232,17 @@ Page({
             sendBoxResult: allData
           })
         }
+
+        //如果当前页面已经是最后一页
+        if (this.data.pageSendBox == res.data.data.sumPage) {
+          this.setData({
+            sendBoxHasMore: false
+          })
+        } else {
+          this.setData({
+            sendBoxHasMore: true
+          })
+        }
       },
       fail: error => {
         this.turnToIndex()
@@ -222,6 +251,10 @@ Page({
         if (this.data.isFresh) {
           wx.stopPullDownRefresh()
           wx.hideNavigationBarLoading()
+        } else if (this.data.isLodingMore) {
+          this.setData({
+            isLodingMore: false
+          })
         }
       }
     })
@@ -299,6 +332,11 @@ Page({
   selectBox: function (e) {
 
     if(e.currentTarget.dataset.box == 'in') {
+
+      if (this.data.inBox) {
+        return
+      }
+
       this.setData({
         inBox: true,
         sendBox: false
@@ -309,6 +347,9 @@ Page({
     }
 
     if (e.currentTarget.dataset.box == 'send') {
+      if (this.data.sendBox) {
+        return
+      }
       this.setData({
         inBox: false,
         sendBox: true
@@ -317,5 +358,75 @@ Page({
         this.getSendBoxList()
       }
     }
+  },
+
+  /**
+   * 点击页面，刷新数据
+   */
+  refreshData: function () {
+
+    var pageName = 'page'
+    if (this.data.inBox) {
+      pageName = 'page'
+    } else if (this.data.sendBox) {
+      pageName = 'pageSendBox'
+    }
+
+    this.setData({
+      [pageName]: 1,
+      isFresh: true
+    })
+    wx.showNavigationBarLoading()
+    this.getMessageList()
+  },
+
+  /**
+   * 上拉加载更多
+   */
+  onReachBottom: function () {
+
+    if (this.data.inBox) {
+      //如果没有更多数据，返回
+      if (!this.data.inBoxHasMore) {
+        console.log("收件箱，没有更多数据")
+        return
+      }
+      //如果正在加载，返回
+      if (this.data.isLoading) {
+        console.log("收件箱，正在加载更多")
+        return
+      }
+      //增加页码
+      var pageNum = this.data.page + 1
+      this.setData({
+        page: pageNum
+      })
+    } else if (this.data.sendBox) {
+      //如果没有更多数据，返回
+      if (!this.data.sendBoxHasMore) {
+        console.log("发件箱，没有更多数据")
+        return
+      }
+      //如果正在加载，返回
+      if (this.data.isLoading) {
+        console.log("发件箱，正在加载更多")
+        return
+      }
+      //增加页码
+      var pageNum = this.data.pageSendBox + 1
+      this.setData({
+        pageSendBox: pageNum
+      })
+    } else {
+      return
+    }
+
+    this.setData({
+      isLodingMore: true
+    })
+
+    this.getMessageList()
+
   }
+
 })
