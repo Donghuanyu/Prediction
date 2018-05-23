@@ -7,21 +7,33 @@ Page({
    */
   data: {
     userId: "",
-    result: null
-  
+    result: new Array(),       //我收到的留言
+    page: 1,             //我收到的留言页码
+    isFresh: false      //是否再刷新
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var user = wx.getStorageSync("userInfo")
+
+    var user = null;
+    user = getApp().globalData.userInfo
     if (user != null && user.id != null && '' != user.id) {
-      var userId =  user.id
-      this.getMessageList(userId)
+      this.data.userId = user.id
       this.setData({
-        userId: userId
+        userId: user.id
       })
+      this.getMessageList()
+      return
+    }
+    user = wx.getStorageSync("userInfo")
+    if (user != null && user.id != null && '' != user.id) {
+      this.data.userId = user.id
+      this.setData({
+        userId: user.id
+      })
+      this.getMessageList()
       return
     }
     wx.showLoading({
@@ -78,20 +90,33 @@ Page({
   },
 
   /**
+   * 下拉刷新
+   */
+  onPullDownRefresh: function () {
+    this.setData({
+      page: 1,
+      isFresh: true
+    })
+    wx.showNavigationBarLoading()
+    this.getMessageList()
+  },
+
+  /**
    * 获取消息列表
    */
-  getMessageList: function (userId) {
+  getMessageList: function () {
     wx.showLoading({
       title: '请稍后...',
     })
     wx.request({
-      url: URL.getMessageList(),
+      url: URL.getMessagePageList(),
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
       method: 'POST',
       data: {
-        userId: userId
+        userId: this.data.userId,
+        page: this.data.page
       },
       success: res => {
         wx.hideLoading()
@@ -100,13 +125,28 @@ Page({
           this.turnToIndex()
           return
         }
-        this.setData({
-          result: res.data.data
-        })
+        if (res.data.data.currentSize > 0) {
+          if (this.data.page == 1) {
+            //如果是刷新，就清空之前的数据
+            this.data.result = new Array()
+          }
+          this.data.result = this.data.result.concat(res.data.data.responseForMessages)
+          console.log(this.data.result)
+          var allData = this.data.result
+          this.setData({
+            result: allData
+          })
+        }
       },
       fail: error => {
         wx.hideLoading()
         this.turnToIndex()
+      },
+      complete: obj => {
+        if (this.data.isFresh) {
+          wx.stopPullDownRefresh()
+          wx.hideNavigationBarLoading()
+        }
       }
     })
   },
@@ -159,10 +199,8 @@ Page({
             key: 'userInfo',
             data: getApp().globalData.userInfo,
           })
-          this.getMessageList(res.data.data.id)
-          this.setData({
-            userId: res.data.data.id
-          })
+          this.data.userId = res.data.data.id
+          this.getMessageList()
           console.log(getApp().globalData.userInfo);
         } else {
           this.turnToIndex()

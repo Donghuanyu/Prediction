@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/index/index",
     "pages/logs/logs",
     "pages/match/match",
@@ -11,6 +10,25 @@
     "pages/showMessage/showMessage",
     "pages/leaveMsg/leaveMsg"
   ],
+  "tabBar": {
+    "color": "#707070",
+    "backgroundColor": "#000000",
+    "selectedColor": "#00b26a",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页",
+        "iconPath": "/image/icon_home.png",
+        "selectedIconPath": "/image/icon_home_select.png"
+      },
+      {
+        "pagePath": "pages/showMessage/showMessage",
+        "text": "消息",
+        "iconPath": "/image/icon_msg.png",
+        "selectedIconPath": "/image/icon_msg_select.png"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
