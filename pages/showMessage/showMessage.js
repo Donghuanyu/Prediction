@@ -7,9 +7,14 @@ Page({
    */
   data: {
     userId: "",
-    result: new Array(),       //我收到的留言
-    page: 1,             //我收到的留言页码
-    isFresh: false      //是否再刷新
+    result: new Array(),              //收件箱数据
+    sendBoxResult: new Array(),       //发件箱数据
+    page: 1,                          //收件箱页码
+    pageSendBox: 1,                   //发件箱页码
+    isFresh: false,                   //是否在刷新
+    showEmptyView: false,             //是否显示空视图，用于没有数据时展示
+    inBox: true,                      //是否是收件箱
+    sendBox: false                    //是否是发件箱
   },
 
   /**
@@ -36,13 +41,7 @@ Page({
       this.getMessageList()
       return
     }
-    wx.showLoading({
-      title: '请稍后...',
-      mask: true,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
-    })
+    wx.showNavigationBarLoading()
     wx.getUserInfo({
       withCredentials: false,
       lang: 'zh_CN',
@@ -93,8 +92,15 @@ Page({
    * 下拉刷新
    */
   onPullDownRefresh: function () {
+    var pageName = 'page'
+    if(this.data.inBox) {
+      pageName = 'page'
+    } else if (this.data.sendBox) {
+      pageName = 'pageSendBox'
+    }
+    
     this.setData({
-      page: 1,
+      [pageName]: 1,
       isFresh: true
     })
     wx.showNavigationBarLoading()
@@ -102,12 +108,23 @@ Page({
   },
 
   /**
-   * 获取消息列表
+   * 获取数据
    */
   getMessageList: function () {
-    wx.showLoading({
-      title: '请稍后...',
-    })
+    if (this.data.inBox) {
+      this.getInBoxList()
+      return
+    }
+    if (this.data.sendBox) {
+      this.getSendBoxList()
+      return
+    }
+  },
+
+  /**
+   * 获取收件箱消息列表
+   */
+  getInBoxList: function () {
     wx.request({
       url: URL.getMessagePageList(),
       header: {
@@ -119,12 +136,19 @@ Page({
         page: this.data.page
       },
       success: res => {
-        wx.hideLoading()
         console.log(res)
         if (res.data.code != '200') {
           this.turnToIndex()
           return
         }
+        //第一页就没有数据
+        if (res.data.data.currentSize == 0 && this.data.page == 1) {
+          this.setData({
+            showEmptyView: true
+          })
+          return
+        }
+        //有数据
         if (res.data.data.currentSize > 0) {
           if (this.data.page == 1) {
             //如果是刷新，就清空之前的数据
@@ -139,7 +163,59 @@ Page({
         }
       },
       fail: error => {
-        wx.hideLoading()
+        this.turnToIndex()
+      },
+      complete: obj => {
+        if (this.data.isFresh) {
+          wx.stopPullDownRefresh()
+          wx.hideNavigationBarLoading()
+        }
+      }
+    })
+  },
+
+  /**
+   * 获取发件箱消息列表
+   */
+  getSendBoxList: function () {
+    wx.request({
+      url: URL.getFromMessagePageList(),
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      data: {
+        userId: this.data.userId,
+        page: this.data.pageSendBox
+      },
+      success: res => {
+        console.log(res)
+        if (res.data.code != '200') {
+          this.turnToIndex()
+          return
+        }
+        //第一页就没有数据
+        if (res.data.data.currentSize == 0 && this.data.pageSendBox == 1) {
+          this.setData({
+            showEmptyView: true
+          })
+          return
+        }
+        //有数据
+        if (res.data.data.currentSize > 0) {
+          if (this.data.page == 1) {
+            //如果是刷新，就清空之前的数据
+            this.data.sendBoxResult = new Array()
+          }
+          this.data.sendBoxResult = this.data.sendBoxResult.concat(res.data.data.responseForMessages)
+          console.log(this.data.sendBoxResult)
+          var allData = this.data.sendBoxResult
+          this.setData({
+            sendBoxResult: allData
+          })
+        }
+      },
+      fail: error => {
         this.turnToIndex()
       },
       complete: obj => {
@@ -160,11 +236,14 @@ Page({
       content: '抱歉，出现了一些错误，您暂时无法查看消息列表',
       showCancel: false,
       confirmText: '知道了',
-      success: function (res) {
+      success: res => {
         if (res.confirm) {
           console.log('用户点击确定')
           wx.redirectTo({
             url: '../index/index',
+          })
+          this.setData({
+            showEmptyView: true
           })
         }
       },
@@ -212,5 +291,31 @@ Page({
         this.turnToIndex()
       }
     })
+  },
+
+  /**
+   * 切换收件箱，发件箱
+   */
+  selectBox: function (e) {
+
+    if(e.currentTarget.dataset.box == 'in') {
+      this.setData({
+        inBox: true,
+        sendBox: false
+      })
+      if (this.data.result == null || this.data.result.length == 0) {
+        this.getInBoxList()
+      }
+    }
+
+    if (e.currentTarget.dataset.box == 'send') {
+      this.setData({
+        inBox: false,
+        sendBox: true
+      })
+      if (this.data.sendBoxResult == null || this.data.sendBoxResult.length == 0) {
+        this.getSendBoxList()
+      }
+    }
   }
 })
