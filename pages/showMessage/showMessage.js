@@ -145,9 +145,10 @@ Page({
           return
         }
         //第一页就没有数据
-        if (res.data.data.currentSize == 0 && this.data.page == 1) {
+        if (res.data.data.sumPage == 0) {
           this.setData({
-            showEmptyView: true
+            showEmptyView: true,
+            result: new Array()
           })
           return
         }
@@ -163,6 +164,11 @@ Page({
           this.setData({
             result: allData
           })
+          if (this.data.showEmptyView) {
+            this.setData({
+              showEmptyView: false
+            })
+          }
         }
 
         //如果当前页面已经是最后一页
@@ -180,6 +186,7 @@ Page({
         this.turnToIndex()
       },
       complete: obj => {
+        wx.hideLoading()
         if (this.data.isFresh) {
           wx.stopPullDownRefresh()
           wx.hideNavigationBarLoading()
@@ -213,9 +220,10 @@ Page({
           return
         }
         //第一页就没有数据
-        if (res.data.data.currentSize == 0 && this.data.pageSendBox == 1) {
+        if (res.data.data.sumPage == 0) {
           this.setData({
-            showEmptyView: true
+            showEmptyView: true,
+            sendBoxResult: new Array()
           })
           return
         }
@@ -231,6 +239,11 @@ Page({
           this.setData({
             sendBoxResult: allData
           })
+          if (this.data.showEmptyView) {
+            this.setData({
+              showEmptyView: false
+            })
+          }
         }
 
         //如果当前页面已经是最后一页
@@ -248,6 +261,7 @@ Page({
         this.turnToIndex()
       },
       complete: obj => {
+        wx.hideLoading()
         if (this.data.isFresh) {
           wx.stopPullDownRefresh()
           wx.hideNavigationBarLoading()
@@ -341,8 +355,16 @@ Page({
         inBox: true,
         sendBox: false
       })
+      console.log('切换到收件箱：')
+      console.log(this.data.result)
       if (this.data.result == null || this.data.result.length == 0) {
         this.getInBoxList()
+      }else{
+        if (this.data.showEmptyView) {
+          this.setData({
+            showEmptyView: false
+          })
+        }
       }
     }
 
@@ -354,8 +376,16 @@ Page({
         inBox: false,
         sendBox: true
       })
+      console.log('切换到发件箱：')
+      console.log(this.data.sendBoxResult)
       if (this.data.sendBoxResult == null || this.data.sendBoxResult.length == 0) {
         this.getSendBoxList()
+      } else {
+        if (this.data.showEmptyView) {
+          this.setData({
+            showEmptyView: false
+          })
+        }
       }
     }
   },
@@ -364,7 +394,13 @@ Page({
    * 点击页面，刷新数据
    */
   refreshData: function () {
-
+    wx.showLoading({
+      title: '加载中...',
+      mask: true,
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
     var pageName = 'page'
     if (this.data.inBox) {
       pageName = 'page'
