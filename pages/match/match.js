@@ -96,11 +96,20 @@ Page({
   dealWithData: function(data) {
 
     if('200' != data.code) {
-      wx.showToast({
-        title: data.msg,
-        icon: 'none',
-        duration: 1500,
-        mask: true
+      
+      wx.showModal({
+        title: '提示',
+        content: data.msg,
+        mask: true,
+        showCancel: false,
+        confirmText: '好的',
+        success: res => {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
       })
       return;
     }
