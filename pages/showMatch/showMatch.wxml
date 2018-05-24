@@ -13,7 +13,7 @@
     </view>
   </view>
   <view wx:if="{{result.matchUser.answerVoteUp != null && '' != result.matchUser.v}}" class='answerTitle'>
-    <text style='margin-left: 25rpx;'>点赞过的问题：</text>
+    <text style='margin-left: 25rpx;'>你们共同点赞过的问题：</text>
   </view>
   <view class='answerView' wx:if="{{result.matchUser.answerVoteUp != null && '' != result.matchUser.v}}">
     <view class='answerContent'>
