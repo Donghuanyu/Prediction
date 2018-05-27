@@ -127,6 +127,25 @@ Page({
           avatarImg: res.tempFilePath
         })
         this.drawImage()
+      },
+      fail: error => {
+        wx.hideLoading()
+        console.log(error)
+        wx.showModal({
+          title: '提示',
+          content: "出错了，请稍后再试",
+          mask: true,
+          showCancel: false,
+          confirmText: '好的',
+          success: res => {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+        return;
       }
     })
   },
@@ -163,22 +182,17 @@ Page({
     ctx.save()
     ctx.beginPath()
     //画圆（X[圆心X坐标], Y[圆心Y坐标], R[圆形半径], 起始弧度, 总止弧度）
-    ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
+    ctx.arc(windowWidth / 2, 0.28 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
     ctx.clip()  //裁剪
-    ctx.drawImage(portraitPath, windowWidth / 2 - 0.15 * windowWidth, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
+    ctx.drawImage(portraitPath, windowWidth / 2 - 0.15 * windowWidth, 0.12 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
     ctx.restore()
-    //绘制名称
-    ctx.setFillStyle('gray')
-    ctx.setFontSize(fontSize)
-    ctx.setTextAlign('center')
-    ctx.fillText(hostNickname + ' 属于：', windowWidth / 2, 0.55 * windowWidth)
-    //绘制匹配结果类型
+    //绘制名称 + 匹配结果类型
     ctx.setFillStyle(color)
     ctx.setFontSize(fontSize)
     ctx.setTextAlign('center')
-    ctx.fillText(this.data.predictionResult.value, windowWidth / 2, 0.62 * windowWidth)
+    ctx.fillText(hostNickname + ' 属于：' + " " + this.data.predictionResult.value, windowWidth / 2, 0.48 * windowWidth)
     //循环绘制TAG标签
-    var start = 0.62
+    var start = 0.48
     for (var i = 0; i < this.data.tags.length; i++) {
       start = start + step
       ctx.setFillStyle('gray')
@@ -193,7 +207,7 @@ Page({
     ctx.setTextAlign('center')
     ctx.fillText('你也来测一下吧', windowWidth / 2, start * windowWidth)
     //绘制二维码
-    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, (start + 0.05) * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
+    ctx.drawImage(qrPath, 0.64 * windowWidth / 2, (start + 0.05) * windowWidth, 0.32 * windowWidth, 0.32 * windowWidth)
     ctx.draw();
     wx.hideLoading()
     this.setData({

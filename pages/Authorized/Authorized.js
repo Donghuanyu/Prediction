@@ -6,14 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
   },
 
   /**
@@ -60,6 +58,10 @@ Page({
     console.log(result.detail.userInfo)
     getApp().globalData.userInfo = result.detail.userInfo
     var that = this
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    })
     // 登录
     wx.login({
       success: res => {
@@ -86,18 +88,33 @@ Page({
       },
       success: res => {
         console.log(res);
+        wx.hideLoading()
         if ('200' == res.data.code) {
           //成功
           getApp().globalData.userInfo['id'] = res.data.data.id
           getApp().globalData.userInfo['openId'] = res.data.data.openId
+          wx.setStorageSync("userInfo", getApp().globalData.userInfo)
+          console.log("getApp()中的用户数据");
+          console.log(getApp().globalData.userInfo);
+          wx.navigateBack({
+            delta: 1
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '获取用户信息失败，请重试',
+            showCancel: false,
+            confirmText: '好的',
+            success: res => {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
         }
-        console.log(getApp().globalData.userInfo);
-        wx.redirectTo({
-          url: '../index/index',
-          success: function(res) {},
-          fail: function(res) {},
-          complete: function(res) {},
-        })
+        
       }
     })
   }

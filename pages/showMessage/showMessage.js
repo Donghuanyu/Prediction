@@ -25,6 +25,19 @@ Page({
    */
   onLoad: function (options) {
 
+    //判断本地用户是否存在
+    var user = wx.getStorageSync('userInfo')
+    if (user == null || user.id == null || "" == user.id) {
+      this.setData({
+        showEmptyView: true
+      })
+      wx.hideNavigationBarLoading()
+      wx.navigateTo({
+        url: '../authorized/authorized',
+      })
+      return
+    }
+
     var user = null;
     user = getApp().globalData.userInfo
     if (user != null && user.id != null && '' != user.id) {
@@ -74,6 +87,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+    var user = null;
+    user = getApp().globalData.userInfo
+    if (user != null && user.id != null && '' != user.id) {
+      this.data.userId = user.id
+      this.setData({
+        userId: user.id
+      })
+    }
   
   },
 
@@ -114,6 +136,32 @@ Page({
    * 获取数据
    */
   getMessageList: function () {
+
+
+    //判断本地用户是否存在
+    if (this.data.user == null || this.data.user.id == null || "" == this.data.user.id) {
+      var user = wx.getStorageSync("userInfo")
+      wx.hideNavigationBarLoading()
+      wx.hideLoading()
+      if (user == null || user.id == null || "" == user.id) {
+        this.setData({
+          showEmptyView: true
+        })
+        wx.navigateTo({
+          url: '../authorized/authorized',
+        })
+        return
+      }else {
+        this.data.user = user
+        this.setData({
+          user: user
+        })
+      }
+      
+    }
+
+
+
     if (this.data.inBox) {
       this.getInBoxList()
       return

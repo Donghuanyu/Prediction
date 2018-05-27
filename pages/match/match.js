@@ -59,10 +59,23 @@ Page({
       })
       return;
     }
-    // name = { name: name }
+
     this.setData({
       loading: true
     })
+
+    //判断本地用户是否存在
+    var user = wx.getStorageSync('userInfo')
+    if (user == null || user.id == null || "" == user.id){
+      this.setData({
+        loading: false
+      })
+      wx.navigateTo({
+        url: '../authorized/authorized',
+      })
+      return
+    }
+
     var that = this;
     wx.request({
       url: URL.matchUser(),

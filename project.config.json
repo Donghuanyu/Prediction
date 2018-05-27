@@ -4,14 +4,14 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.97",
+	"libVersion": "1.6.5",
 	"appid": "wx4d9ac396de7f196c",
 	"projectname": "Prediction",
 	"isGameTourist": false,

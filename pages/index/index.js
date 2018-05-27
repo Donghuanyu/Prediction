@@ -50,5 +50,24 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  onShow: function() {
+    var user = null;
+    user = getApp().globalData.userInfo
+    if (user != null && user.id != null && '' != user.id) {
+      this.data.userInfo = user
+      this.setData({
+        userInfo: user,
+        hasUserInfo: true
+      })
+    }
+  },
+  /**
+   * 去授权
+   */
+  gotoAuthorized: function() {
+    wx.navigateTo({
+      url: '../authorized/authorized',
+    })
   }
 })

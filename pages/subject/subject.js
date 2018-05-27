@@ -203,6 +203,15 @@ Page({
       title: '加载中...',
       mask: true
     });
+    //判断本地用户是否存在
+    var user = wx.getStorageSync('userInfo')
+    if (user == null || user.id == null || "" == user.id) {
+      wx.hideLoading()
+      wx.navigateTo({
+        url: '../authorized/authorized',
+      })
+      return
+    }
     var that = this;
     var user = getApp().globalData.userInfo;
     var requestParam = {

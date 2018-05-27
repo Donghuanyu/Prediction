@@ -8,7 +8,8 @@
     "pages/predictionResult/predictionResult",
     "pages/showMatch/showMatch",
     "pages/showMessage/showMessage",
-    "pages/leaveMsg/leaveMsg"
+    "pages/leaveMsg/leaveMsg",
+    "pages/authorized/authorized"
   ],
   "tabBar": {
     "color": "#707070",
