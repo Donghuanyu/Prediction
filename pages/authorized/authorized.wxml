@@ -1,0 +1,9 @@
+<view class='rootView'>
+  <image class='imgView' src='../../image/icon_match.png'></image>
+  <view class='infoView'>
+    <text style='font-size: 10pt; margin-bottom: 30rpx;'>是否确认授权小程序：灵魂匹配I知I乎大数据</text>
+    <text style='font-size: 8pt; color: grey;'>使用过程中需要获得您的头像、性别、昵称信息</text>
+  </view>
+  <button class="commonButton" size='defualt' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">确认授权</button>
+  <button class="commonButton" bindtap='quit'>取消</button>
+</view>

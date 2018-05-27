@@ -1,0 +1,32 @@
+/* pages/Authorized/Authorized.wxss */
+page {
+  -webkit-user-select:none;
+  user-select:none;
+  width:100%;
+  overflow-x:hidden;
+  height: 100%;
+  background-color: white;
+}
+
+.rootView {
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imgView {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+  margin-top: 120rpx;
+}
+
+.infoView {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120rpx;
+  margin-bottom: 120rpx;
+}
