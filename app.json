@@ -9,8 +9,7 @@
     "pages/showMatch/showMatch",
     "pages/showMessage/showMessage",
     "pages/leaveMsg/leaveMsg",
-    "pages/authorized/authorized",
-    "pages/authorized"
+    "pages/authorized/authorized"
   ],
   "tabBar": {
     "color": "#707070",
