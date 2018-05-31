@@ -67,6 +67,24 @@ Page({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         that.createUser(res.code)
+      },
+      fail: error => {
+        wx.hideLoading()
+        console.log("wx.login失败")
+        console.log(error)
+        wx.showModal({
+          title: '提示',
+          content: '登陆失败，请保证网络环境正常后再试一次',
+          showCancel: false,
+          confirmText: '好的',
+          success: res => {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
       }
     })
   },
@@ -115,6 +133,24 @@ Page({
           })
         }
         
+      },
+      fail: error => {
+        wx.hideLoading()
+        console.log("createUser失败")
+        console.log(error)
+        wx.showModal({
+          title: '提示',
+          content: '登陆失败，请保证网络环境正常后再试一次',
+          showCancel: false,
+          confirmText: '好的',
+          success: res => {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
       }
     })
   }

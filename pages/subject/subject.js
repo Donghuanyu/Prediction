@@ -216,8 +216,15 @@ Page({
       })
       return
     }
+    user = getApp().globalData.userInfo
+    if (user == null || user.id == null || "" == user.id) {
+      wx.hideLoading()
+      wx.navigateTo({
+        url: '../authorized/authorized',
+      })
+      return
+    }
     var that = this;
-    var user = getApp().globalData.userInfo;
     var requestParam = {
       type: that.data.type,
       answerIds: that.data.submitAnswers,

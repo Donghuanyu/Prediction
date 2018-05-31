@@ -1,46 +1,47 @@
 <!--pages/predictionResult/predictionResult.wxml-->
-<view class='container rootView'>
-  <!-- 恭喜 -->
-  <view class='headView'>
-    <view class='headTitle'>
-      <!-- <image class='imgView' src='../../image/icon_congratulations.png'></image> -->
-      <text class='imgTitle'>Congratulations</text>
+<form bindsubmit='shareResult' report-submit='true'>
+  <view class='container rootView'>
+    <!-- 恭喜 -->
+    <view class='headView'>
+      <view class='headTitle'>
+        <!-- <image class='imgView' src='../../image/icon_congratulations.png'></image> -->
+        <text class='imgTitle'>Congratulations</text>
+      </view>
+      <text>你已经完成了soul的灵魂鉴定题</text>
     </view>
-    <text>你已经完成了soul的灵魂鉴定题</text>
-  </view>
 
-  <!-- 结果，tag和头像  -->
-  <view class='resultView'>
-    <view class='tag'>
-      <view class='tagLeft' wx:key="{{id}}" wx:for="{{tagsLeft}}" wx:for-index="id" wx:for-item="item">
-        <text decode="{{true}}" class='tagTitle'>{{item.title}}&ensp;</text>
-        <text class='tagValue'>{{item.value}}</text>
+    <!-- 结果，tag和头像  -->
+    <view class='resultView'>
+      <view class='tag'>
+        <view class='tagLeft' wx:key="{{id}}" wx:for="{{tagsLeft}}" wx:for-index="id" wx:for-item="item">
+          <text decode="{{true}}" class='tagTitle'>{{item.title}}&ensp;</text>
+          <text class='tagValue'>{{item.value}}</text>
+        </view>
+      </view>
+      <view>
+        <image class='avatarView' src='{{avatarUrl}}'></image>
+      </view>
+      <view class='tag'>
+        <view class='tagRight' wx:key="{{id}}" wx:for="{{tagsRight}}" wx:for-index="id" wx:for-item="item">
+          <text decode="{{true}}" class='tagTitle'>{{item.title}}&ensp;</text>
+          <text class='tagValue'>{{item.value}}</text>
+        </view>
       </view>
     </view>
-    <view>
-      <image class='avatarView' src='{{avatarUrl}}'></image>
+
+    <!-- 结果名称 -->
+    <view class='conclusionView'>
+      <text class='resultTitle' decode="{{true}}">你属于&ensp;</text>
+      <text class='resultName'>{{predictionResult.value}}</text>
     </view>
-    <view class='tag'>
-      <view class='tagRight' wx:key="{{id}}" wx:for="{{tagsRight}}" wx:for-index="id" wx:for-item="item">
-        <text decode="{{true}}" class='tagTitle'>{{item.title}}&ensp;</text>
-        <text class='tagValue'>{{item.value}}</text>
-      </view>
+
+    <!-- 结论内容 -->
+    <view class='conclusionView'>
+      <text>下面是与您匹配的用户：</text>
     </view>
-  </view>
 
-  <!-- 结果名称 -->
-  <view class='conclusionView'>
-    <text class='resultTitle'  decode="{{true}}">你属于&ensp;</text>
-    <text class='resultName'>{{predictionResult.value}}</text>
-  </view>
-
-  <!-- 结论内容 -->
-  <view class='conclusionView'>
-    <text>下面是与您匹配的用户：</text>
-  </view>
-
-  <!-- 匹配用户 -->
-  <view class='matchView'>
+    <!-- 匹配用户 -->
+    <view class='matchView'>
       <view class='userView' wx:key="{{id}}" wx:for="{{matchUsers}}" wx:for-index="id" wx:for-item="item">
         <view class='userItem' bindtap='matchUserItemClick' data-user='{{item}}'>
           <image class='userImg' src='{{item.avatarUrl}}'></image>
@@ -51,26 +52,26 @@
               <image class='genderIcon' wx:if="{{item.gender == '2'}}" src="../../image/icon_female.png"></image>
             </view>
             <view class='userResultView'>
-              <text class='resultTitle'  decode="{{true}}" wx:if="{{item.gender == '1'}}">他属于&ensp;</text>
-              <text class='resultTitle'  decode="{{true}}" wx:if="{{item.gender == '2'}}">她属于&ensp;</text>
-              <text class='resultName'>{{predictionResult.value}}</text>
+              <text class='resultTitle' decode="{{true}}" wx:if="{{item.gender == '1'}}">他属于&ensp;</text>
+              <text class='resultTitle' decode="{{true}}" wx:if="{{item.gender == '2'}}">她属于&ensp;</text>
+              <text class='resultName'>{{predictionResult.matchUserPredictionResultName}}</text>
             </view>
           </view>
-          
+
         </view>
       </view>
-  </view>
-
-  <button class='commonButton shareButton' bindtap='shareResult'>分享结果</button>
-
-  <!-- 分享画面 -->
-  <view class='canvasBox' hidden='{{!showShare}}' bindtap='closeShareView'></view>
-  <view class='canvasView' hidden='{{!showShare}}'>
-    <canvas canvas-id='shareCanvas' style='width: 100%; height:{{windowHeight}}px;'></canvas>
-    <view class='buttonView'>
-      <button class='commonButton buttonCommon' bindtap='saveShareImg'>保存分享图</button>
     </view>
+
+    <button class='commonButton shareButton' form-type='submit'>分享结果</button>
+
+    <!-- 分享画面 -->
+    <view class='canvasBox' hidden='{{!showShare}}' bindtap='closeShareView'></view>
+    <view class='canvasView' hidden='{{!showShare}}'>
+      <canvas canvas-id='shareCanvas' style='width: 100%; height:{{windowHeight}}px;'></canvas>
+      <view class='buttonView'>
+        <button class='commonButton buttonCommon' bindtap='saveShareImg'>保存分享图</button>
+      </view>
+    </view>
+
   </view>
-
-
-</view>
+</form>

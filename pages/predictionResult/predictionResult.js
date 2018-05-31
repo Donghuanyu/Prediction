@@ -1,4 +1,6 @@
 // pages/predictionResult/predictionResult.js
+const URL = getApp().globalData.URL;
+const requestUtil = require('../../utils/requestUtil.js')
 Page({
 
   /**
@@ -55,13 +57,10 @@ Page({
         showUser: show
       })
     }
-    if (getApp().globalData.userInfo != null && 
-      getApp().globalData.userInfo.avatarUrl != null && 
-      "" != getApp().globalData.userInfo.avatarUrl){
-      this.setData({
-        avatarUrl: getApp().globalData.userInfo.avatarUrl
-      })
-    }
+    var user = getApp().globalData.userInfo
+    this.setData({
+      avatarUrl: user.avatarUrl
+    })
   },
 
   /**
@@ -108,10 +107,13 @@ Page({
    */
   shareResult: function (e) {
     
+    console.log("formId:" + e.detail.formId)
+
     if (this.data.hasDraw) {
       this.setData({
         showShare: true
       })
+      requestUtil.buildWeChatForm(e.detail.formId)
       return
     }
     wx.showLoading({
@@ -127,6 +129,7 @@ Page({
           avatarImg: res.tempFilePath
         })
         this.drawImage()
+        requestUtil.buildWeChatForm(e.detail.formId)
       },
       fail: error => {
         wx.hideLoading()
@@ -143,6 +146,7 @@ Page({
             } else if (res.cancel) {
               console.log('用户点击取消')
             }
+            requestUtil.buildWeChatForm(e.detail.formId)
           }
         })
         return;

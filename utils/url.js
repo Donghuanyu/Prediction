@@ -1,7 +1,7 @@
 const DEBUG = "debug";
 const RELEASE = "release";
 const DEBUG_BASE_URL = "http://localhost:8080/prediction";
-const RELEASE_BASE_URL = "http://1.1.1.1:8080/prediction";
+const RELEASE_BASE_URL = "https://1.1.1.1/prediction";
 
 function debugOrRelease() {
   return DEBUG;
@@ -77,6 +77,13 @@ function getFromMessagePageList() {
   return getBaseUrl() + "/message/getFromMessagePageList";
 }
 
+/**
+ * 提交formId
+ */
+function buildWeChatForm() {
+  return getBaseUrl() + "/weChatForm/buildWeChatForm";
+}
+
 
 module.exports = {
   matchUser: matchUser,
@@ -86,5 +93,6 @@ module.exports = {
   leaveMessage: leaveMessage,
   getMessageList: getMessageList,
   getMessagePageList: getMessagePageList,
-  getFromMessagePageList: getFromMessagePageList
+  getFromMessagePageList: getFromMessagePageList,
+  buildWeChatForm: buildWeChatForm
 }
