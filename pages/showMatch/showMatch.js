@@ -90,9 +90,15 @@ Page({
       success: res => {
         wx.hideLoading()
         if ('200' != res.data.code) {
+          var message;
+          if ('567' == res.data.code) {
+            message = res.data.msg;
+          } else {
+            message = '抱歉，出错了，请重新再试一次吧。'
+          }
           wx.showModal({
             title: '提示',
-            content: '出现了一些错误：' + res.data.msg,
+            content: message,
             showCancel: false,
             confirmText: '我知道了',
             success: function(res) {},
