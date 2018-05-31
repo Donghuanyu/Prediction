@@ -1,12 +1,12 @@
 <!--pages/catalog/catalog.wxml-->
 <view class="container rootView">
-  <navigator class='catlogView' url='/pages/subject/subject?title=走过的路&type=road'>
-    <image class='imgView' src='/image/bg_road.png'></image>
+   <navigator class='catlogView' url='/pages/subject/subject?title=走过的路&type=road'>
+    <image class='imgView' src='/image/bg_road.png' mode="widthFix"></image>
   </navigator>
   <navigator class='catlogView' url='/pages/subject/subject?title=读过的书&type=read'>
-    <image class='imgView' src='/image/bg_read.png'></image>
+    <image class='imgView' src='/image/bg_read.png' mode="widthFix"></image>
   </navigator>
   <navigator class='catlogView' url='/pages/subject/subject?title=爱过的人&type=love'>
-    <image class='imgView' src='/image/bg_love.png'></image>
-  </navigator>
+    <image class='imgView' src='/image/bg_love.png' mode="widthFix"></image>
+  </navigator> 
 </view>

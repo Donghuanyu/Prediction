@@ -9,8 +9,13 @@ page {
 }
 
 .rootView {
-  background-color: #f2f2f2;
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   box-sizing: border-box; 
+  background-color: #f2f2f2;
   overflow-y: scroll;
 }
 
@@ -21,7 +26,7 @@ page {
 }
 
 .progressView {
-  width: 90%;
+  width: 94%;
   margin: 16px 0 16px 0;
   font-size: 10pt;
 }
@@ -30,7 +35,7 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 90%;
+  width: 94%;
   margin: 8px 0 8px 0;
   background-color: #ffffff;
   border-radius: 10px;

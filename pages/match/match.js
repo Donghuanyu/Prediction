@@ -1,5 +1,6 @@
 // pages/match.js
 const URL = getApp().globalData.URL
+const requestUtil = require('../../utils/requestUtil.js')
 Page({
 
   /**
@@ -49,6 +50,9 @@ Page({
    */
   matchUser: function (e) {
 
+    //提交formId
+    console.log("formId:" + e.detail.formId)
+
     var name = e.detail.value.name
     if (name == null || "" == name) {
       wx.showToast({
@@ -75,7 +79,6 @@ Page({
       })
       return
     }
-
     var that = this;
     wx.request({
       url: URL.matchUser(),
@@ -98,6 +101,7 @@ Page({
         that.setData({
           loading: false
         })
+        requestUtil.buildWeChatForm(e.detail.formId)
       }
     })
 

@@ -9,23 +9,30 @@
   margin: 15px 0 0 0;
 }
 
-.canvasView {
-  width: 300px; 
-  border-radius: 5px;
-  height: 300px; 
-}
-
 .imgView {
   width: 100%;
   height: 100%;
   border-radius: 5px;
   /* opacity: 0.6; */
   /* filter:alpha(opacity=60); */
-  z-index: 15;
 }
 
-.textView {
-  z-index: 100;
+.formView {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  border-radius: 5px;
+  height: 30%;
+  margin: 15px 0 0 0;
+}
+
+.buttonRoad {
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+  border-radius: 5px;
+  color: transparent;
 }
 
 .rootView {

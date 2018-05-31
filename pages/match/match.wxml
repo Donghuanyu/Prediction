@@ -1,5 +1,5 @@
 <!--pages/match.wxml-->
-<form bindsubmit='matchUser'>
+<form bindsubmit='matchUser' report-submit='true'>
   <view class="container">
     <input class="commonInput inputView" name="name" placeholder="请输入您在知乎平台的昵称" auto-focus/>
     <view class="textLayout">

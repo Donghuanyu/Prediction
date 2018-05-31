@@ -1,4 +1,5 @@
 // pages/subject/subject.js
+const requestUtil = require('../../utils/requestUtil.js')
 Page({
 
   /**
@@ -143,6 +144,7 @@ Page({
  */
   nextClick: function(event) {
 
+    console.log("formId:" + event.detail.formId)
     //判断是否选择了答案
     var currentIndex = this.data.index;
     if (this.data.currentAnswer == null || "" == this.data.currentAnswer){
@@ -150,9 +152,9 @@ Page({
         title: '请先完成当前题目',
         icon: 'none'
       })
+      requestUtil.buildWeChatForm(event.detail.formId)
       return
     }
-
     //如果的必答题，将答案放到列表中
     if ("true" == this.data.subject.necessary) {
       this.data.submitAnswers.push(this.data.currentAnswer);
@@ -185,6 +187,8 @@ Page({
       currentAnswer: "",
       percent: currentPercent
     })
+
+    requestUtil.buildWeChatForm(event.detail.formId)
   },
 
   /**

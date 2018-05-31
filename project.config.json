@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -60,6 +60,12 @@
 					"pathName": "pages/index/index",
 					"query": "",
 					"scene": "1012"
+				},
+				{
+					"id": -1,
+					"name": "题目",
+					"pathName": "pages/catalog/catalog",
+					"query": ""
 				}
 			]
 		}
